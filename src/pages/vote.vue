@@ -1,6 +1,6 @@
 <template>
 <div class="main">
-  <el-tabs type="card" v-model="keyword">
+  <el-tabs type="border-card" stretch="true" v-model="keyword">
       <el-tab-pane label="动画" name="动画" ></el-tab-pane>
       <el-tab-pane label="国风" name="国风"></el-tab-pane>
       <el-tab-pane label="科幻" name="科幻" ></el-tab-pane>
@@ -21,12 +21,12 @@
 </template>
 
 <script>
-import love from "../assets/thumb1.jpg"
-import loveActive from "../assets/thumb2.jpg"
+import love from "../assets/thumb1.png"
+import loveActive from "../assets/thumb2.png"
 import $ from "jquery"
 
 const bbt = "https://hemc.100steps.net/2017/wechat/Home/Index/index?state=";
-const PREFIX = "" 
+const PREFIX = "/resource/post/" 
 const baseUrl="http://111.230.183.100:5000";
 
 export default {
@@ -49,6 +49,7 @@ export default {
         data:{
           keyword:this.keyword
         },
+        dataType:"JSON",
         xhrFields:{withCredentials:true},
         success:res=>{
           this.movies = res.map( movie => ({
@@ -57,13 +58,13 @@ export default {
           }))
         },
         statusCode:{
-          400:()=>{
+          400(){
             console.log("电影类型错误")
           },
-          401:()=>{
-            location.href=bbt+encodeURIComponent(location.href);
+          401(){
+            // location.href=bbt+encodeURIComponent(location.href);
           },
-          410:()=>{
+          410(){
             alert("活动不在进行期间")
           }
         }
@@ -95,18 +96,24 @@ body,
     line-height: 40px;
     display: inline-block;
     list-style: none;
-    font-size: 14px;
+    font-size: 3.5vw;
     font-weight: 500;
     color: white;
     position: relative;
+    width:20%;
 }
 .main .el-tabs__item.is-active {
-    color: red;
+    color: white;
+    font-size:4.5vw;
+}
+.main .el-tabs__content {
+  display:none;
 }
 .item{
   position:relative;
   margin-top:6%;
   background: rgb(46,58,88);
+  padding-bottom:2vw;
 }
 .pic{
   position:absolute;
@@ -116,14 +123,14 @@ body,
 }
 .m-title{
   position:relative;
-  left:40%;top:1vh;
-  font-size: 5vh;
+  left:40%;margin-top:5vw;
+  font-size: 6vw;
   font-family: Microsoft YaHei Regular;
   color: rgba(255,255,255,1);
 }
 .score{
   position: relative;
-  left:40%; top:1vh;
+  left:40%; margin-top:2vw;
   font-size: 4vh;
   font-family: Microsoft YaHei Regular;
   color: rgba(255,184,64,1);
@@ -131,13 +138,15 @@ body,
 .abstract{
   position:relative;
   width:58%;
-  left:40%;top:2vh;
+  left:40%;margin-top:2vw;
   font-size:3vw;
   font-family: Microsoft YaHei Regular;
   color: rgba(255,255,255,1);
   margin-right:2%;
 }
 .love{
+  width:20%;
+  height:20%;
   position:absolute;
   right:0;
   top:0;
