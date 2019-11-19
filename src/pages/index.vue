@@ -5,9 +5,9 @@
     <img :src="shadow" class="shadow">
      <img :src="cloud" class="cloud">
   </div>
-  <div @click="gotoVote" class="btn btn1">电影投票</div>
-  <div class="btn btn2">电影对对碰</div>
-  <div class="btn btn3">电影猜猜看</div>
+  <btn1></btn1>
+  <btn2></btn2>
+  <btn3></btn3>
   <div @click="gotoBottle" class="corner">
     <img :src="star" class="star"/>
     <div class="font1">我的许愿瓶</div>
@@ -20,8 +20,9 @@ import star from "../assets/star.png"
 import title from "../assets/title.png"
 import shadow from "../assets/shadow.png"
 import cloud from "../assets/cloud.png"
-import circle1 from "../assets/circle1.png"
-import circle2 from "../assets/circle2.png"
+import btn1 from "../components/btn1"
+import btn2 from "../components/btn2"
+import btn3 from "../components/btn3"
 export default {
   name: "index",
   data(){
@@ -30,18 +31,17 @@ export default {
       title:title,
       shadow:shadow,
       cloud:cloud,
-      circle1:circle1,
-      circle2:circle2
     }
+  },
+  components:{
+    btn1,
+    btn2,
+    btn3
   },
   methods:{
     gotoBottle(){
       var _this=this;
       _this.$router.push("bottle");
-    },
-      gotoVote(){
-      var _this=this;
-      _this.$router.push("vote");
     },
   }
 };
@@ -92,32 +92,6 @@ body,
 }
 .font1{
   font-size: 4vw;
-  color: rgba(255,255,255,1);
-}
-.btn{
-  position:absolute;
-  top:70%;
-  height:20vw; width:20vw;
-  text-align: center;
-  background-size:100% 100%;
-  line-height:20vw;
-}
-.btn1{
-  left:10%;
-  background-image:url("../assets/circle1.png");
-  font-size:5vw;
-  color:black;
-}
-.btn2{
-  left:40%;
-  background-image:url("../assets/circle2.png");
-  font-size:4vw;
-  color: rgba(255,255,255,1);
-}
-.btn3{
-  left:70%;
-  background-image:url("../assets/circle2.png");
-  font-size:4vw;
   color: rgba(255,255,255,1);
 }
 </style>

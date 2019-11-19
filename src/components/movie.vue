@@ -1,47 +1,100 @@
 <template>
   <div class="item">
-  <img class="pic" :src="a"></img>
-  <div class="intro">
-    <span class="title">哪吒</span>
-    <div class="abstract">
-    <p>本应是灵珠英雄的哪吒却成了混世大魔王，这调皮捣蛋顽劣不堪的哪吒却徒有一颗做英雄的心。然而面对众人对哪吒的误解和即将来临的天雷的降临，哪吒是否命中注定会立地成魔，他将何去何从</p>
+    <img class="pic" :src="imgUrl">
+    <div class="intro">
+      <div class="title">{{title}}</div>
+      <div class="score">{{score}}</div>
+      <img @click="like" class="love" v-if="isClick==0" :src="love">
+      <img @click="like" class="love" v-if="isClick==1" :src="loveActive">
+      <div class="abstract">{{introduction}}</div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
 import a from "../assets/1.jpg"
+import love from "../assets/thumb1.jpg"
+import loveActive from "../assets/thumb2.jpg"
 export default {
   name: 'movie',
-  props: {
-    
-    // msg: String
-  },
   data(){
     return{
-      a:a
+      movielist:[],
+      title:[],
+      socre:[],
+      imgUrl:[],
+      introduction:[],
+      love:love,
+      loveActive:loveActive,
     }
+  },
+  methods:{
+    like:function(){
+      this.isClick=!this.isClick
+    }
+  },
+  mounted(){
+    $.ajax({
+      url:baseUrl+"/movielist",
+      type:"post",
+      data:{
+        keyword,
+      },
+      xhrFields:{withCredentials:true},
+      success:res=>{
+        let i=0;
+        this.movielist=res.map(item=>{
+
+        })
+      }
+    })
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+html,
+body,
+#app {
+  height: 100%;
+}
 .item{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center; 
+  position:relative;
+  margin-top:6%;
+  background: rgb(46,58,88);
 }
 .pic{
-  width:40%;
-  height:30vh;
+  position:absolute;
+  left:2%; top:-2vh;
+  width:33%;
+  border:1px solid #A59F59;
 }
 .title{
-  font-weight:700;
+  position:relative;
+  left:40%;top:1vh;
+  font-size: 5vh;
+  font-family: Microsoft YaHei Regular;
+  color: rgba(255,255,255,1);
+}
+.score{
+  position: relative;
+  left:40%; top:1vh;
+  font-size: 4vh;
+  font-family: Microsoft YaHei Regular;
+  color: rgba(255,184,64,1);
 }
 .abstract{
-  font-size:30rpx;
+  position:relative;
+  width:58%;
+  left:40%;top:2vh;
+  font-size:3vw;
+  font-family: Microsoft YaHei Regular;
+  color: rgba(255,255,255,1);
+  margin-right:2%;
+}
+.love{
+  position:absolute;
+  right:0;
+  top:0;
 }
 </style>
