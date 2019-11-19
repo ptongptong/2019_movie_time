@@ -42,7 +42,7 @@ export default {
   },
   watch:{
     keyword(){
-      this.console.log("keyword",this.keyword)
+      console.log("keyword",this.keyword)
       $.ajax({
         url:baseUrl+"/movieList",
         type:"post",
@@ -58,7 +58,7 @@ export default {
         },
         statusCode:{
           400:()=>{
-            this.console.log("电影类型错误")
+            console.log("电影类型错误")
           },
           401:()=>{
             location.href=bbt+encodeURIComponent(location.href);
